@@ -2,6 +2,7 @@ from entity.product import Product
 from flask_restful import Resource, reqparse
 from repository.product_repository import ProductRepository
 from flask import request
+from flask_jwt_extended import jwt_required
 
 
 class ProductDetail(Resource):
@@ -10,12 +11,14 @@ class ProductDetail(Resource):
     parser.add_argument("quantity", type=str, required=True, help="quantity is required")
     parser.add_argument("desc", type=str, required=True, help="desc is required")
 
+    @jwt_required()
     def get(self, product_id: int):
         product = ProductRepository.find_by_id(product_id)
         if product:
             return product.json(), 200
         return {"message": f"Product not found with id : {product_id}"}, 404
 
+    @jwt_required()
     def put(self, product_id: int):
         data = ProductDetail.parser.parse_args()
         product = ProductRepository.find_by_id(product_id)
@@ -34,6 +37,7 @@ class ProductGetAll(Resource):
     parser.add_argument("quantity", type=str, required=True, help="quantity is required")
     parser.add_argument("desc", type=str, required=True, help="desc is required")
 
+    @jwt_required()
     def get(self):
         page_str = request.args.get("page")
         page = 1
@@ -71,6 +75,7 @@ class ProductGetAll(Resource):
                    }
                }, 200
 
+    @jwt_required()
     def post(self):
         data = ProductGetAll.parser.parse_args()
         product = Product(None, data.name, data.quantity, data.desc)
