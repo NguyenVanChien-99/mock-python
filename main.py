@@ -4,9 +4,25 @@ from controller.user_controller import UserInfo, UserRegister, UserUpdateInfo, U
     UserLogin
 from controller.product_controller import ProductDetail, ProductGetAll
 from flask_jwt_extended import JWTManager
+import yaml
+
+username = ""
+password = ""
+host = ""
+dbname = ""
+with open("config.yaml", "r") as f:
+    try:
+        config = yaml.safe_load(f)
+        username = config['database']['username']
+        password = config['database']['password']
+        host = config['database']['host']
+        dbname = config['database']['dbname']
+    except yaml.YAMLError as exc:
+        print(exc)
+
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = "mysql+pymysql://sa:Xinchao94!!32@127.0.0.1:3306/mock_python"
+app.config['SQLALCHEMY_DATABASE_URI'] = f"mysql+pymysql://{username}:{password}@{host}/{dbname}"
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
 app.config['JWT_SECRET_KEY'] = "secret-key"
 jwt = JWTManager(app)

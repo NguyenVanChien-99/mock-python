@@ -1,0 +1,5 @@
+database:
+  username: "sa"
+  password: "Xinchao94!!32"
+  host: "127.0.0.1:3306"
+  dbname: "mock_python"
