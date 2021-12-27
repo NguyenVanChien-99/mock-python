@@ -1,0 +1,10 @@
+Werkzeug
+SQLAlchemy
+PyMySQL
+PyJWT
+Flask
+Flask-SQLAlchemy
+Flask-RESTful
+Flask-JWT
+Flask-Migrate
+Flask-JWT-Extended
