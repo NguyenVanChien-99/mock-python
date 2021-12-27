@@ -19,6 +19,7 @@ setup(
         "Flask-JWT>=0.3.2",
         "Flask-Migrate>=3.1.0",
         "Flask-JWT-Extended>=4.3.1",
-        "jwt>=1.3.1"
+        "jwt>=1.3.1",
+        "pyyaml>=6.0"
     ],
 )
