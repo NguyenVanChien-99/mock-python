@@ -3,10 +3,12 @@ from email.mime.text import MIMEText
 from email.mime.image import MIMEImage
 from email.mime.application import MIMEApplication
 from email.mime.multipart import MIMEMultipart
+import os
 
 port = 465  # For SSL
-username = "nguyenvanchien9499@gmail.com"
-password = "happyKBTG??44"
+
+username = os.environ["USER_EMAIL"]
+password = os.environ["USER_PASSWORD"]
 
 smtp = smtplib.SMTP('smtp.gmail.com', 587)
 smtp.ehlo()
